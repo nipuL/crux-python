@@ -47,10 +47,6 @@ It uses 2 attributes, and any subsequent methods (read further) for subclassing:
 		except AttributeError:
 			pass
 			
-		try:
-			data = data.decode('iso-8859-1')
-		except:
-			pass
 		return (meta,data)
 		
 	def __process_meta_depends_on(self, data):
@@ -124,12 +120,12 @@ Pkgfiles will generally only have a build function.
 			
 class Pkgfile(object):
 	def parse_file(self, file):
-		data = open(file,'r').read()
+		self.data = open(file,'r').read()
 		try:
-			data.decode('iso-8859-1')
+			self.data = self.data.decode('iso-8859-1')
 		except:
 			pass
-		self.parse_string(data)
+		self.parse_string(self.data)
 		
 	def parse_string(self, data):
 		self._parse_meta_data(data)
