@@ -21,7 +21,8 @@ It uses 2 attributes, and any subsequent methods (read further) for subclassing:
 	META_FUNCTIONS = (
 		'description',
 		'url',
-		'depends_on'
+		'depends_on',
+		'nice_to_have',
 	)
 	
 	def _parse_meta_data(self, data):
@@ -54,6 +55,9 @@ It uses 2 attributes, and any subsequent methods (read further) for subclassing:
 		
 	def __process_meta_depends_on(self, data):
 		return [dep.strip() for dep in data.replace(',',' ').split()]
+
+	def __process_meta_nice_to_have(self, data):
+		return self.__process_meta_depends_on(data)
 		
 class Variables(object):
 	'''The Variables class is used for processing a Pkgfiles variables.
