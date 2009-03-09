@@ -68,10 +68,10 @@ Variables will be processed further if a method exists in the form:
 		
 '''
 	VAR_RE = {
-		'name': 'name=(.*?)\n',
-		'version': 'version=(.*?)\n',
-		'release': 'release=(.*?)\n',
-		'source': 'source=\((.*?)\)\n',
+		'name': '\n\s*name=(.*?)\s*\n',
+		'version': '\n\s*version=(.*?)\s*\n',
+		'release': '\n\s*release=(.*?)\s*\n',
+		'source': '\n\s*source=\((.*?)\)\s*\n',
 	}
 	
 	def _parse_variables(self, data):
@@ -99,6 +99,9 @@ Variables will be processed further if a method exists in the form:
 			e.strip()
 			for e in source.replace('\\',' ').replace('\t',' ').replace('\n',' ').split()
 		]
+
+	def __process_variable_release(self, release):
+		return int(release)
 		
 class Functions(object):
 	'''The Functions class is used to extract any top level functions from the Pkgfile.
